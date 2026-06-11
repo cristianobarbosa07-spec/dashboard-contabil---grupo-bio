@@ -5977,9 +5977,12 @@ function razaoEmpresaFromFile(filename) {
 // ══════════════════════════════════════════════════════════════════
 // RAZÃO CONTÁBIL — API
 // ══════════════════════════════════════════════════════════════════
-const API_BASE  = 'https://web-production-b4559d.up.railway.app';
+
+
+const API_BASE = 'https://web-production-b4559d.up.railway.app';
 // Token armazenado localmente no navegador (não fica visível no código)
 const API_TOKEN = sessionStorage.getItem('razao_token') || '';
+
 
 // Fetch com autenticação automática
 async function apiFetch(url, opts = {}) {
