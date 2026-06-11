@@ -5977,9 +5977,19 @@ function razaoEmpresaFromFile(filename) {
 // ══════════════════════════════════════════════════════════════════
 // RAZÃO CONTÁBIL — API
 // ══════════════════════════════════════════════════════════════════
-const API_BASE  = 'https://web-production-b4559d.up.railway.app';
+const API_BASE_LOCAL   = 'http://localhost:8000';
+const API_BASE_RAILWAY = 'https://web-production-b4559d.up.railway.app';
+let   API_BASE = API_BASE_RAILWAY; // será sobrescrito após detecção
 // Token armazenado localmente no navegador (não fica visível no código)
 const API_TOKEN = sessionStorage.getItem('razao_token') || '';
+
+// Detecta se API local está disponível e usa ela preferencialmente
+(async () => {
+  try {
+    const r = await fetch(API_BASE_LOCAL + '/health', { signal: AbortSignal.timeout(1500) });
+    if (r.ok) { API_BASE = API_BASE_LOCAL; console.log('API: local'); }
+  } catch { console.log('API: railway'); }
+})();
 
 // Fetch com autenticação automática
 async function apiFetch(url, opts = {}) {
