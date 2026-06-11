@@ -5979,7 +5979,7 @@ function razaoEmpresaFromFile(filename) {
 // ══════════════════════════════════════════════════════════════════
 const API_BASE_LOCAL   = 'http://localhost:8000';
 const API_BASE_RAILWAY = 'https://web-production-b4559d.up.railway.app';
-let   API_BASE = API_BASE_RAILWAY; // será sobrescrito após detecção
+let   API_BASE = API_BASE_RAILWAY; // auto-detect: local ou railway
 // Token armazenado localmente no navegador (não fica visível no código)
 const API_TOKEN = sessionStorage.getItem('razao_token') || '';
 
@@ -6469,15 +6469,4 @@ async function _razaoExportarExcel() {
     a.href = URL.createObjectURL(new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
     a.download = 'razao_' + new Date().toISOString().slice(0,10) + '.xlsx';
     a.click();
-    showToast('Exportado: ' + lancs.length.toLocaleString('pt-BR') + ' lançamentos', 'ok');
-  } catch(e) { showToast('Erro ao exportar: ' + e.message, 'err'); }
-}
-
-// ── Init ──────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(setupRazaoEvents, 100);
-});
-
-</script>
-</body>
-</html>
+    showToast('Exportado: ' + lancs.le
