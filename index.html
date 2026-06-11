@@ -6462,4 +6462,9 @@ async function _razaoExportarExcel() {
     a.href = URL.createObjectURL(new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
     a.download = 'razao_' + new Date().toISOString().slice(0,10) + '.xlsx';
     a.click();
-    showToast('Exportado: ' + lancs.le
+    showToast('Exportado: ' + lancs.length.toLocaleString('pt-BR') + ' lançamentos', 'ok');
+  } catch(e) { showToast('Erro ao exportar: ' + e.message, 'err'); }
+}
+</script>
+</body>
+</html>
